@@ -1,28 +1,33 @@
-const Gadjet = function (name, battaryCappacity) {
+let powerConsumption = 0;
+
+const Gadjet = function (name, batteryCappacity) {
     this.name = name;
-    this.battaryCappacity = battaryCappacity;
+    this.batteryCappacity = batteryCappacity;
     this.connect = false;
   };
+function getInfoSumPower() {
+    console.log(`Потребляемая мощность включенных в сеть приборов - ${powerConsumption} Ватт`)
+  }
   
   Gadjet.prototype.connected = function () {
       console.log(`${this.name} подключен к электросети`);
       this.connect = true;
+      powerConsumption += this.power
   };
   Gadjet.prototype.unconnected = function () {
       console.log(`${this.name} не подключен к электросети`);
       this.connect = false
-      this.power = 0;
   };
   
-  function MyGadjet(name, brand, battaryCappacity, material, power) {
+  function MyGadjet(name, brand, batteryCappacity, material, power) {
     this.name = name;
     this.brand = brand;
-    this.battaryCappacity = battaryCappacity;
+    this.batteryCappacity = batteryCappacity;
     this.material = material;
     this.power = power;
     this.connect = true;
   }
-  
+
   MyGadjet.prototype = new Gadjet();
   const phone = new MyGadjet("Телефон", "iPhone", 5000, "metall/plastic", 5);
   phone.unconnected();
@@ -32,5 +37,4 @@ const Gadjet = function (name, battaryCappacity) {
   laptop.connected();
   console.log(laptop)
 
-  const powerConsumption = phone.power + laptop.power
-  console.log(`Потребляемая мощность включенных в сеть приборов - ${powerConsumption} Ватт`)
+  getInfoSumPower()
